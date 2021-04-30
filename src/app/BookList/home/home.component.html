@@ -1,15 +1,16 @@
-<mat-card>
-  <mat-card-header gutterBottom>
-    <mat-card-title>Gutenburg Project</mat-card-title>
-    <mat-card-subtitle
-      >A social cataloging website that allows you to freely search its database
-      of books, annotations, and reviews.</mat-card-subtitle
-    >
-  </mat-card-header>
+<mat-card-header gutterBottom>
+  <mat-card-title>Gutenburg Project</mat-card-title>
+  <mat-card-subtitle
+    >A social cataloging website that allows you to freely search its database
+    of books, annotations, and reviews.</mat-card-subtitle
+  >
+</mat-card-header>
+<div *ngIf="!selectedCategory; else category" class="home">
   <mat-card-content>
     <mat-grid-list [cols]="isMobile ? 1 : 2" rowHeight="100px">
       <mat-grid-tile
-        class="mat-body d-flex col-md-6 col-sm-6 mat-elevation-z2"
+        type="button"
+        class="mat-body d-flex mat-elevation-z2"
         *ngFor="let category of categories"
         (click)="selectCategory(category.value)"
       >
@@ -20,4 +21,32 @@
       </mat-grid-tile>
     </mat-grid-list>
   </mat-card-content>
-</mat-card>
+</div>
+<ng-template #category>
+  <div class="bookList">
+    <mat-card-content>
+      <mat-grid-list [cols]="isMobile ? 3 : 6" rowHeight="100px">
+        <mat-grid-tile
+          type="button"
+          class="mat-body d-flex"
+          *ngFor="let book of filteredData"
+          (click)="selectCategory(category.value)"
+        >
+          <div>
+            <img
+              mat-card-image
+              src="{{ book.formats['image/jpeg'] }}"
+              alt="bookCover"
+            />
+            <div>
+              {{ book.title }}
+            </div>
+            <div *ngFor="let author of book.authors">
+              {{ author.name.split(",").join("") }}
+            </div>
+          </div>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </mat-card-content>
+  </div>
+</ng-template>

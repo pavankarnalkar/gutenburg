@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BookService } from '../book.service';
 import * as _ from 'underscore';
+import { Router } from '@angular/router';
+import { filter, map } from 'rxjs/operators';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -11,7 +13,7 @@ import * as _ from 'underscore';
 export class HomeComponent implements OnInit {
   public isMobile: boolean = false;
   responseData;
-  filteredData: any;
+  filteredData = [];
   dataToFilter: any;
   categories = [
     { name: 'FICTION', value: 'Fiction', cols: 12, rows: 1 },
@@ -22,9 +24,12 @@ export class HomeComponent implements OnInit {
     { name: 'ADVENTURE', value: 'Adventure', cols: 12, rows: 1 },
     { name: 'POLITICS', value: 'Fiction', cols: 12, rows: 1 },
   ];
+  category: any;
+  selectedCategory: any;
   constructor(
-    breakpointObserver: BreakpointObserver, 
-    private bookService: BookService
+    breakpointObserver: BreakpointObserver,
+    private bookService: BookService,
+    private router: Router
   ) {
     breakpointObserver.observe(['(max-width: 599px)']).subscribe((result) => {
       this.isMobile = result.matches;
@@ -32,22 +37,37 @@ export class HomeComponent implements OnInit {
   }
   ngOnInit() {}
   selectCategory(category) {
-    this.bookService.getBooks().subscribe((res) => {
-      this.responseData = res;
-      this.dataToFilter = this.responseData.results;
-      if (category) {
-        this.dataToFilter = _.filter(this.dataToFilter, (data) => {
-          data.subjects.map((subject) => {
-            if (
-              subject.includes(category) ||
-              subject.toLowerCase().includes(category)
-            )
-              // _.where(subject, { author: 'Shakespeare', year: 1611 });
-              return data;
-          });
-        });
-      }
-      debugger;
-    });
+    this.selectedCategory = category;
+    this.bookService
+      .getBooks()
+      // .pipe(
+      //   filter((res) => {
+      //     this.responseData = res;
+      //     this.filteredData = this.responseData.results;
+      //     return (this.filteredData = _.filter(this.filteredData, (item) => {
+      //       return item.formats['image/jpeg'];
+      //     }));
+      //   }) //
+      // )
+      .subscribe(
+        (res) => {
+          this.responseData = res;
+          this.filteredData = this.responseData.results;
+          if (category) {
+            this.filteredData = _.filter(this.filteredData, (item) => {
+              const subjects = item.subjects.join('');
+              const cover = item.formats['image/jpeg'];
+              return (
+                (subjects.includes(category) ||
+                  subjects.includes(category.toLowerCase())) &&
+                cover
+              );
+            });
+          }
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
   }
 }
