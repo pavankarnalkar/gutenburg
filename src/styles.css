@@ -2,13 +2,13 @@
 @font-face {
   font-family: Montesserat;
   src: url(./assets/fonts/Montserrat-Regular.ttf) format(truetype);
-  font-style: normal;
+  /* font-style: normal; */
 }
 
 @font-face {
   font-family: MontesseratSemiBold;
   src: url(./assets/fonts/Montserrat-SemiBold.ttf) format(truetype);
-  font-style: normal;
+  /* font-style: semi; */
 }
 html,
 body {
@@ -17,5 +17,5 @@ body {
 }
 body {
   margin: 0;
-  font-family: MontesseratSemiBold !important;
+  font-family: Montesserat !important;
 }

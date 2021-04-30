@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BookListComponent } from './BookList/book-list/book-list.component';
 import { HomeComponent } from './BookList/home/home.component';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
@@ -17,6 +18,7 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserModule,
     MatListModule,
     HttpClientModule,
+    MatAutocompleteModule,
     MatGridListModule,
     AppRoutingModule,
     MatGridListResponsiveModule,

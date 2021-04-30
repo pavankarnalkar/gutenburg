@@ -4,7 +4,9 @@ import { HttpClient } from '@angular/common/http';
 import { BookService } from '../book.service';
 import * as _ from 'underscore';
 import { Router } from '@angular/router';
-import { filter, map } from 'rxjs/operators';
+import { filter, map, startWith } from 'rxjs/operators';
+import { FormControl } from '@angular/forms';
+import { Observable } from 'rxjs';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -26,6 +28,9 @@ export class HomeComponent implements OnInit {
   ];
   category: any;
   selectedCategory: any;
+  myControl = new FormControl();
+  options: string[] = ['one', 'Two'];
+  filteredOptions: Observable<string[]>;
   constructor(
     breakpointObserver: BreakpointObserver,
     private bookService: BookService,
@@ -35,7 +40,12 @@ export class HomeComponent implements OnInit {
       this.isMobile = result.matches;
     });
   }
-  ngOnInit() {}
+  ngOnInit() {
+    this.filteredOptions = this.myControl.valueChanges.pipe(
+      startWith(''),
+      map((value) => this._filter(value))
+    );
+  }
   selectCategory(category) {
     this.selectedCategory = category;
     this.bookService
@@ -51,7 +61,9 @@ export class HomeComponent implements OnInit {
       // )
       .subscribe(
         (res) => {
+          this.selectedCategory = category;
           this.responseData = res;
+          // this.options = this.responseData.results;
           this.filteredData = this.responseData.results;
           if (category) {
             this.filteredData = _.filter(this.filteredData, (item) => {
@@ -69,5 +81,16 @@ export class HomeComponent implements OnInit {
           console.log(err);
         }
       );
+  }
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+
+    return this.options.filter((option) =>
+      option.toLowerCase().includes(filterValue)
+    );
+  }
+
+  onClick(value) {
+    console.log(value, 'value');
   }
 }

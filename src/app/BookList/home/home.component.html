@@ -1,11 +1,11 @@
-<mat-card-header gutterBottom>
-  <mat-card-title>Gutenburg Project</mat-card-title>
-  <mat-card-subtitle
-    >A social cataloging website that allows you to freely search its database
-    of books, annotations, and reviews.</mat-card-subtitle
-  >
-</mat-card-header>
 <div *ngIf="!selectedCategory; else category" class="home">
+  <mat-card-header gutterBottom>
+    <mat-card-title>Gutenburg Project</mat-card-title>
+    <mat-card-subtitle
+      >A social cataloging website that allows you to freely search its database
+      of books, annotations, and reviews.</mat-card-subtitle
+    >
+  </mat-card-header>
   <mat-card-content>
     <mat-grid-list [cols]="isMobile ? 1 : 2" rowHeight="100px">
       <mat-grid-tile
@@ -23,6 +23,28 @@
   </mat-card-content>
 </div>
 <ng-template #category>
+  <form class="example-form">
+    <mat-form-field class="example-full-width">
+      <mat-label>{{ selectedCategory }}</mat-label>
+      <input
+        type="text"
+        placeholder="Pick one"
+        aria-label="selectedCategory"
+        matInput
+        [formControl]="myControl"
+        [matAutocomplete]="auto"
+        (click)="onClick(myControl.value)"
+      />
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option
+          *ngFor="let option of filteredOptions | async"
+          [value]="option"
+        >
+          {{ option }}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  </form>
   <div class="bookList">
     <mat-card-content>
       <mat-grid-list [cols]="isMobile ? 3 : 6" rowHeight="100px">

@@ -19,6 +19,7 @@
 ::ng-deep .mat-card-header .mat-card-title {
   font-size: 48px !important;
   justify-content: center;
+  font-family: MontesseratSemiBold !important;
 }
 .home ::ng-deep .mat-grid-tile {
   border-radius: 4px !important;
@@ -32,7 +33,7 @@
 .bookList ::ng-deep .mat-grid-tile {
   /* margin-bottom: 20px !important; */
   width: 114px !important;
-  height: 300px !important;
+  height: 250px !important;
   background-color: #f0f0f6;
   border-radius: 8px 8px 0 0 !important;
   font-family: 12px !important ;
@@ -54,4 +55,13 @@
 
 .bookList ::ng-deep .mat-grid-tile .mat-figure {
   display: block !important;
+}
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.example-full-width {
+  width: 100%;
 }
