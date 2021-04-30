@@ -1,0 +1,23 @@
+<mat-card>
+  <mat-card-header gutterBottom>
+    <mat-card-title>Gutenburg Project</mat-card-title>
+    <mat-card-subtitle
+      >A social cataloging website that allows you to freely search its database
+      of books, annotations, and reviews.</mat-card-subtitle
+    >
+  </mat-card-header>
+  <mat-card-content>
+    <mat-grid-list [cols]="isMobile ? 1 : 2" rowHeight="100px">
+      <mat-grid-tile
+        class="mat-body d-flex col-md-6 col-sm-6 mat-elevation-z2"
+        *ngFor="let category of categories"
+        (click)="selectCategory(category.value)"
+      >
+        {{ category.name }}
+        <div class="spaceRight">
+          <img src="../../../assets/img/Next.svg" alt="next" />
+        </div>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </mat-card-content>
+</mat-card>

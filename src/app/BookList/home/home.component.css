@@ -1,0 +1,46 @@
+.height100 {
+  height: 100%;
+  color: #5e56e7 !important;
+}
+
+::ng-deep .mat-card {
+  font-family: MontesseratSemiBold !important;
+  color: #5e56e7 !important;
+  background-color: aqua;
+  width: 100%;
+  padding: 5% !important;
+}
+
+
+::ng-deep mat-card-content {
+  padding-top: 5%;
+}
+::ng-deep figure.mat-figure {
+  justify-content: space-between !important;
+}
+
+.spaceRight {
+  padding-right: 2% !important;
+}
+::ng-deep .mat-grid-tile .mat-figure {
+  padding-left: 2% !important;
+}
+::ng-deep .mat-card-header .mat-card-title {
+  font-size: 48px !important;
+  justify-content: center;
+}
+::ng-deep .mat-grid-tile {
+  border-radius: 4px !important;
+  margin-bottom: 20px !important;
+  font-family: MontesseratSemiBold !important;
+  height: 50px !important;
+  background-color: white !important;
+  box-shadow: 0 2px 5px 0 rgba(211, 209, 238, 0.5);
+}
+.mat-list-option:not(.mat-list-item-disabled) {
+  margin-top: 20px;
+}
+.example-spacer {
+  flex: 1 1 auto;
+}
+

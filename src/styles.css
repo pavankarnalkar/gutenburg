@@ -1,0 +1,21 @@
+/* You can add global styles to this file, and also import other style files */
+@font-face {
+  font-family: Montesserat;
+  src: url(./assets/fonts/Montserrat-Regular.ttf) format(truetype);
+  font-style: normal;
+}
+
+@font-face {
+  font-family: MontesseratSemiBold;
+  src: url(./assets/fonts/Montserrat-SemiBold.ttf) format(truetype);
+  font-style: normal;
+}
+html,
+body {
+  height: 100%;
+  background-color: #52525a;
+}
+body {
+  margin: 0;
+  font-family: MontesseratSemiBold !important;
+}
