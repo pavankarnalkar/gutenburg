@@ -23,28 +23,29 @@
   </mat-card-content>
 </div>
 <ng-template #category>
-  <form class="example-form">
-    <mat-form-field class="example-full-width">
-      <mat-label>{{ selectedCategory }}</mat-label>
-      <input
-        type="text"
-        placeholder="Pick one"
-        aria-label="selectedCategory"
-        matInput
-        [formControl]="myControl"
-        [matAutocomplete]="auto"
-        (click)="onClick(myControl.value)"
-      />
-      <mat-autocomplete #auto="matAutocomplete">
-        <mat-option
-          *ngFor="let option of filteredOptions | async"
-          [value]="option"
-        >
-          {{ option }}
-        </mat-option>
-      </mat-autocomplete>
-    </mat-form-field>
-  </form>
+  <div>
+    <!-- <mat-form-field class="example-form-field"> -->
+    <!-- <form onSubmit=> -->
+    <label>{{ selectedCategory }}</label> <br />
+    <input
+      type="text"
+      placeholder="Search"
+      [(ngModel)]="value"
+      (keyup)="findBook($event)"
+    />
+    <span
+      mat-button
+      *ngIf="value"
+      matSuffix
+      mat-elevation-z2
+      mat-icon-button
+      aria-label="Clear"
+      (click)="value = ''"
+      ><img src="../../../assets/img/Cancel.svg" class="cancel" alt="" />
+    </span>
+    <!-- </mat-form-field> -->
+    <!-- </form> -->
+  </div>
   <div class="bookList">
     <mat-card-content>
       <mat-grid-list [cols]="isMobile ? 3 : 6" rowHeight="100px">

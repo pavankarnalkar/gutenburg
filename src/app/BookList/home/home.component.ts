@@ -13,6 +13,7 @@ import { Observable } from 'rxjs';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
+  value;
   public isMobile: boolean = false;
   responseData;
   filteredData = [];
@@ -41,10 +42,24 @@ export class HomeComponent implements OnInit {
     });
   }
   ngOnInit() {
-    this.filteredOptions = this.myControl.valueChanges.pipe(
-      startWith(''),
-      map((value) => this._filter(value))
-    );
+    // this.filteredOptions = this.myControl.valueChanges.pipe(
+    //   startWith(''),
+    //   map((value) => this._filter(value))
+    // );
+  }
+  findBook(event) {
+    this.filteredData = _.filter(this.filteredData, (item) => {
+      const title = item.title;
+      const authors = item.authors.join('');
+      console.log(this.value, event.target.value, 'eeaeeee');
+      return (
+        title.includes(event.target.value) ||
+        title.includes(event.target.value.toLowerCase()) ||
+        authors.includes(event.target.value) ||
+        authors.includes(event.target.value.toLowerCase())
+      );
+    });
+    debugger;
   }
   selectCategory(category) {
     this.selectedCategory = category;
@@ -69,10 +84,13 @@ export class HomeComponent implements OnInit {
             this.filteredData = _.filter(this.filteredData, (item) => {
               const subjects = item.subjects.join('');
               const cover = item.formats['image/jpeg'];
+              const bookshelves = item.bookshelves;
               return (
-                (subjects.includes(category) ||
-                  subjects.includes(category.toLowerCase())) &&
-                cover
+                cover &&
+                (subjects.includes(this.selectedCategory) ||
+                  subjects.includes(this.selectedCategory.toLowerCase()) ||
+                  bookshelves.includes(this.selectedCategory) ||
+                  bookshelves.includes(this.selectedCategory.toLowerCase()))
               );
             });
           }
@@ -82,15 +100,15 @@ export class HomeComponent implements OnInit {
         }
       );
   }
-  private _filter(value: string): string[] {
-    const filterValue = value.toLowerCase();
+  // private _filter(value: string): string[] {
+  //   const filterValue = value.toLowerCase();
 
-    return this.options.filter((option) =>
-      option.toLowerCase().includes(filterValue)
-    );
-  }
+  //   return this.options.filter((option) =>
+  //     option.toLowerCase().includes(filterValue)
+  //   );
+  // }
 
-  onClick(value) {
-    console.log(value, 'value');
-  }
+  // onClick(value) {
+  //   console.log(value, 'value');
+  // }
 }
