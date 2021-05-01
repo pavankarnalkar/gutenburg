@@ -32,14 +32,9 @@ export class HomeComponent implements OnInit {
   options: string[] = ['one', 'Two'];
   filteredOptions: Observable<string[]>;
   constructor(
-    breakpointObserver: BreakpointObserver,
     private bookService: BookService,
     private router: Router
-  ) {
-    breakpointObserver.observe(['(max-width: 599px)']).subscribe((result) => {
-      this.isMobile = result.matches;
-    });
-  }
+  ) { }
   ngOnInit() {
     this.filteredOptions = this.myControl.valueChanges.pipe(
       startWith(''),

@@ -1,19 +1,13 @@
 <div *ngIf="!selectedCategory; else category" class="home">
   <mat-card-header gutterBottom>
     <mat-card-title>Gutenburg Project</mat-card-title>
-    <mat-card-subtitle
-      >A social cataloging website that allows you to freely search its database
-      of books, annotations, and reviews.</mat-card-subtitle
-    >
+    <mat-card-subtitle>A social cataloging website that allows you to freely search its database
+      of books, annotations, and reviews.</mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
     <mat-grid-list [cols]="isMobile ? 1 : 2" rowHeight="100px">
-      <mat-grid-tile
-        type="button"
-        class="mat-body d-flex mat-elevation-z2"
-        *ngFor="let category of categories"
-        (click)="selectCategory(category.value)"
-      >
+      <mat-grid-tile type="button" class="mat-body d-flex mat-elevation-z2" *ngFor="let category of categories"
+        (click)="selectCategory(category.value)">
         {{ category.name }}
         <div class="spaceRight">
           <img src="../../../assets/img/Next.svg" alt="next" />
@@ -23,52 +17,29 @@
   </mat-card-content>
 </div>
 <ng-template #category>
+  <!-- <div> -->
   <form class="example-form">
     <mat-form-field class="example-full-width">
       <mat-label>{{ selectedCategory }}</mat-label>
-      <input
-        type="text"
-        placeholder="Pick one"
-        aria-label="selectedCategory"
-        matInput
-        [formControl]="myControl"
-        [matAutocomplete]="auto"
-        (click)="onClick(myControl.value)"
-      />
+      <input type="text" placeholder="Pick one" aria-label="selectedCategory" matInput [formControl]="myControl"
+        [matAutocomplete]="auto" (click)="onClick(myControl.value)" />
       <mat-autocomplete #auto="matAutocomplete">
-        <mat-option
-          *ngFor="let option of filteredOptions | async"
-          [value]="option"
-        >
+        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
           {{ option }}
         </mat-option>
       </mat-autocomplete>
     </mat-form-field>
   </form>
   <div class="bookList">
-    <mat-card-content>
-      <mat-grid-list [cols]="isMobile ? 3 : 6" rowHeight="100px">
-        <mat-grid-tile
-          type="button"
-          class="mat-body d-flex"
-          *ngFor="let book of filteredData"
-          (click)="selectCategory(category.value)"
-        >
-          <div>
-            <img
-              mat-card-image
-              src="{{ book.formats['image/jpeg'] }}"
-              alt="bookCover"
-            />
-            <div>
-              {{ book.title }}
-            </div>
-            <div *ngFor="let author of book.authors">
-              {{ author.name.split(",").join("") }}
-            </div>
-          </div>
-        </mat-grid-tile>
-      </mat-grid-list>
-    </mat-card-content>
+    <div class="album-art" *ngFor="let book of filteredData" (click)="selectCategory(category.value)">
+      <img mat-card-image src="{{ book.formats['image/jpeg'] }}" alt="bookCover" />
+      <div class="book-title">
+        {{ book.title }}
+      </div>
+      <span *ngFor="let author of book.authors" class="author-name">
+        {{ author.name.split(",").join("") }}
+      </span>
+    </div>
   </div>
+<!-- </div> -->
 </ng-template>

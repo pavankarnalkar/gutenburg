@@ -65,3 +65,25 @@
 .example-full-width {
   width: 100%;
 }
+
+.bookList {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.album-art {
+  display: flex;
+  flex-direction: column;
+}
+
+.author-name {
+  word-wrap: break-word;
+  width: 150px;
+  display: flex;
+  flex-direction: column;
+}
+
+.book-title {
+  word-break: break-word;
+  width: 114px;
+}
