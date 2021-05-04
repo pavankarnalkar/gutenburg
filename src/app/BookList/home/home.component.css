@@ -68,7 +68,10 @@
 
 .bookList {
   display: flex;
-  flex-wrap: wrap;
+  align-items: stretch;
+  /* flex-wrap: wrap; */
+  justify-content: center;
+  flex-flow: row wrap;
 }
 
 .album-art {
