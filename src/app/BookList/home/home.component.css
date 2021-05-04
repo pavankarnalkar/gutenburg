@@ -84,7 +84,46 @@ input {
 input .focus {
   border-color: #5e56e7 !important;
 }
-
+.categoryImage {
+  height: 45px;
+  object-fit: contain;
+}
 .cancel {
   margin-left: -3%;
+}
+.subheading {
+  font-size: 30px !important;
+  vertical-align: middle !important;
+  padding-left: 2% !important;
+}
+.fullwidth {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background: #fff;
+  text-decoration: none;
+  padding: 4px;
+  width: calc(100% - 10px);
+}
+.grid-list-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  background: #fff;
+  text-decoration: none;
+  padding: 4px;
+  width: calc(100% - 10px);
+  /* &:hover {
+    color: mat-color($app-primary);
+  } */
+
+  /* .mat-icon:first-child {
+    text-align: center;
+    width: 40px;
+  } */
+}
+.img,
+.svg {
+  cursor: pointer !important;
 }

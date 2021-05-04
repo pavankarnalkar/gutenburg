@@ -14,10 +14,13 @@
         *ngFor="let category of categories"
         (click)="selectCategory(category.value)"
       >
-        {{ category.name }}
+        <!-- <span class="fullWidth"> -->
+        <img src="{{ category.img }}" class="categoryImage" />
+        <span class="flex-remain">{{ category.name }}</span>
         <div class="spaceRight">
           <img src="../../../assets/img/Next.svg" alt="next" />
         </div>
+        <!-- </span> -->
       </mat-grid-tile>
     </mat-grid-list>
   </mat-card-content>
@@ -26,7 +29,16 @@
   <div>
     <!-- <mat-form-field class="example-form-field"> -->
     <!-- <form onSubmit=> -->
-    <label>{{ selectedCategory }}</label> <br />
+    <!-- <a [routerLink]="['/home']"> -->
+    <span>
+      <img
+        src="../../../assets/img/Back.svg"
+        alt="back"
+        (click)="selectedCategory = null"
+      />
+      <!-- </a> -->
+      <label class="subheading">{{ selectedCategory }}</label> </span
+    ><br />
     <input
       type="text"
       placeholder="Search"
@@ -36,7 +48,6 @@
     <span
       mat-button
       *ngIf="value"
-      matSuffix
       mat-elevation-z2
       mat-icon-button
       aria-label="Clear"
@@ -49,26 +60,124 @@
   <div class="bookList">
     <mat-card-content>
       <mat-grid-list [cols]="isMobile ? 3 : 6" rowHeight="100px">
-        <mat-grid-tile
-          type="button"
-          class="mat-body d-flex"
-          *ngFor="let book of filteredData"
-          (click)="selectCategory(category.value)"
-        >
-          <div>
-            <img
-              mat-card-image
-              src="{{ book.formats['image/jpeg'] }}"
-              alt="bookCover"
-            />
+        <div *ngIf="userFilteredData.length; else noUserFilter">
+          <mat-grid-tile
+            type="button"
+            class="mat-body d-flex"
+            *ngFor="let book of userFilteredData"
+          >
             <div>
-              {{ book.title }}
+              <img
+                mat-card-image
+                src="{{ book.formats['image/jpeg'] }}"
+                alt="bookCover"
+              />
+              <div>
+                {{ book.title }}
+              </div>
+              <div *ngFor="let author of book.authors">
+                {{ author.name.split(",").join("") }}
+              </div>
             </div>
-            <div *ngFor="let author of book.authors">
-              {{ author.name.split(",").join("") }}
+          </mat-grid-tile>
+        </div>
+        <ng-template #noUserFilter>
+          <mat-grid-tile
+            type="button"
+            class="mat-body d-flex"
+            *ngFor="let book of filteredData"
+          >
+            <div>
+              <img
+                mat-card-image
+                src="{{ book.formats['image/jpeg'] }}"
+                alt="bookCover"
+              />
+              <div>
+                {{ book.title }}
+              </div>
+              <div *ngFor="let author of book.authors">
+                {{ author.name.split(",").join("") }}
+              </div>
             </div>
-          </div>
-        </mat-grid-tile>
+          </mat-grid-tile>
+        </ng-template>
+      </mat-grid-list>
+      <mat-grid-list
+        [responsive]="responsive"
+        (responsiveColsChange)="cols = $event"
+        rowHeight="60"
+        gutterSize="6px"
+      >
+        <!-- <mat-grid-tile *ngFor="let book of userFilteredData"> -->
+          <a class="grid-list-item mat-body mat-elevation-z2" mat-ripple>
+            <!-- <mat-icon>insert_drive_file</mat-icon>
+            <span class="flex-remain">{{ folder.name }}</span> -->
+            <div *ngIf="userFilteredData.length; else noUserFilter">
+              <mat-grid-tile
+                type="button"
+                class="mat-body d-flex"
+                *ngFor="let book of userFilteredData"
+              >
+                <div>
+                  <img
+                    mat-card-image
+                    src="{{ book.formats['image/jpeg'] }}"
+                    alt="bookCover"
+                  />
+                  <div>
+                    {{ book.title }}
+                  </div>
+                  <div *ngFor="let author of book.authors">
+                    {{ author.name.split(",").join("") }}
+                  </div>
+                </div>
+              </mat-grid-tile>
+            </div>
+            <ng-template #noUserFilter>
+              <mat-grid-tile
+                type="button"
+                class="mat-body d-flex"
+                *ngFor="let book of filteredData"
+              >
+                <div>
+                  <img
+                    mat-card-image
+                    src="{{ book.formats['image/jpeg'] }}"
+                    alt="bookCover"
+                  />
+                  <div>
+                    {{ book.title }}
+                  </div>
+                  <div *ngFor="let author of book.authors">
+                    {{ author.name.split(",").join("") }}
+                  </div>
+                </div>
+              </mat-grid-tile>
+            </ng-template>
+            <!-- <button mat-icon-button 
+          [matMenuTriggerFor]="menu"
+          (click)="$event.preventDefault()">
+          <mat-icon>more_vert</mat-icon>
+        </button> -->
+            <!-- <mat-menu #menu="matMenu" 
+          xPosition="before"
+          overlapTrigger="false">
+          <button mat-menu-item>
+            <mat-icon>dialpad</mat-icon>
+            <span>Redial</span>
+          </button>
+          <button mat-menu-item disabled>
+            <mat-icon>voicemail</mat-icon>
+            <span>Check voicemail</span>
+          </button>
+          <button mat-menu-item>
+            <mat-icon>notifications_off</mat-icon>
+            <span>Disable alerts</span>
+          </button>
+        </mat-menu> -->
+          </a>
+        <!-- </mat-grid-tile> -->
       </mat-grid-list>
     </mat-card-content>
   </div>
