@@ -1,14 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
 @font-face {
   font-family: Montesserat;
-  src: url(./assets/fonts/Montserrat-Regular.ttf) format(truetype);
-  /* font-style: normal; */
+  src: url(assets/fonts/Montserrat-Regular.ttf) format(truetype);
+  font-style: normal;
 }
 
 @font-face {
-  font-family: MontesseratSemiBold;
-  src: url(./assets/fonts/Montserrat-SemiBold.ttf) format(truetype);
-  /* font-style: semi; */
+  font-family: MontesseratSemiBold !important;
+  src: url(assets/fonts/Montserrat-SemiBold.ttf) format(truetype);
+  /* font-style: normal; */
+  /* font-display: d; */
 }
 html,
 body {
@@ -17,5 +18,6 @@ body {
 }
 body {
   margin: 0;
-  font-family: Montesserat !important;
+  font-family: MontesseratSemiBold !important;
+  /* font-style: normal !important; */
 }

@@ -1,44 +1,27 @@
-.height100 {
-  height: 100%;
+.content {
+  /* font-family: "Montesserat, SemiBold" !important; */
   color: #5e56e7 !important;
+  background-color: #f8f7ff;
+  width: 100%;
+  padding: 5% !important;
 }
-
-::ng-deep mat-card-content {
-  padding-top: 5%;
+.title {
+  font-size: 48px;
 }
-.home ::ng-deep figure.mat-figure {
-  justify-content: space-between !important;
+.subtitle {
+  font-size: 20px;
+  color: #333333;
+  padding-top: 3%;
+}
+.bookHeight {
+  min-height: max-content;
+}
+.homeHeight {
+  /* height: 100%; */
 }
 
 .spaceRight {
   padding-right: 2% !important;
-}
-.home ::ng-deep .mat-grid-tile .mat-figure {
-  padding-left: 2% !important;
-}
-::ng-deep .mat-card-header .mat-card-title {
-  font-size: 48px !important;
-  justify-content: center;
-  font-family: MontesseratSemiBold !important;
-}
-.home ::ng-deep .mat-grid-tile {
-  border-radius: 4px !important;
-  margin-bottom: 20px !important;
-  border: 5px soild black;
-  font-family: MontesseratSemiBold !important;
-  height: 50px !important;
-  background-color: white !important;
-  box-shadow: 0 2px 5px 0 rgba(211, 209, 238, 0.5);
-}
-.bookList ::ng-deep .mat-grid-tile {
-  /* margin-bottom: 20px !important; */
-  width: 114px !important;
-  height: 250px !important;
-  background-color: #f0f0f6;
-  border-radius: 8px 8px 0 0 !important;
-  font-family: 12px !important ;
-  /* color: white !important; */
-  font-family: MontesseratSemiBold !important;
 }
 .bookList ::ng-deep .mat-card-image {
   /* margin-bottom: 20px !important; */
@@ -47,7 +30,7 @@
   margin: 0px !important;
   border-radius: 8px !important;
   box-shadow: 0 2px 5px 0 rgba(211, 209, 238, 0.5) !important;
-  font-family: MontesseratSemiBold !important;
+  /* font-family: "Montesserat, SemiBold" !important; */
 }
 .bookList ::ng-deep figure.mat-figure {
   justify-content: space-between !important;
@@ -61,16 +44,26 @@
   max-width: 500px;
   width: 100%;
 }
+.example-form-field {
+  width: 200px;
+}
 
 .example-full-width {
   width: 100%;
 }
 
+.home .bookList {
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  padding-top: 15% !important;
+  flex-flow: row wrap;
+}
 .bookList {
   display: flex;
   align-items: stretch;
-  /* flex-wrap: wrap; */
-  justify-content: center;
+  justify-content: space-between;
+  padding-top: 5%;
   flex-flow: row wrap;
 }
 
@@ -78,10 +71,30 @@
   display: flex;
   flex-direction: column;
 }
-
+.spaceLeft {
+  padding-left: 2%;
+  font-size: 22px;
+  color: #333333;
+}
+.category-art {
+  display: flex !important;
+  flex-flow: row wrap;
+  align-items: center;
+  width: 350px;
+  border-radius: 4px !important;
+  margin-bottom: 20px !important;
+  justify-content: space-around;
+  border: 5px soild #333333;
+  /* font-family: MontesseratSemiBold !important; */
+  height: 50px !important;
+  background-color: white !important;
+  box-shadow: 0 2px 5px 0 rgba(211, 209, 238, 0.5);
+}
 .author-name {
   word-wrap: break-word;
   width: 150px;
+  color: #a0a0a0;
+  font-size: 12px;
   display: flex;
   flex-direction: column;
 }
@@ -89,4 +102,39 @@
 .book-title {
   word-break: break-word;
   width: 114px;
+  font-size: 12px;
+  color: #333333;
+}
+form {
+  display: flex;
+  flex-direction: row;
+}
+input {
+  border-radius: 4px !important;
+  padding-left: 6% !important;
+  width: 97%;
+  height: 40px !important;
+  border: 1px solid #f8f7ff;
+  /* background-color:  !important; */
+  background: #f0f0f6 url("../../../assets/img/Search.svg") 2% no-repeat !important;
+}
+input:focus-visible {
+  border: 1px soild #5e56e7 !important;
+}
+.categoryImage {
+  height: 45px;
+  object-fit: contain;
+}
+.cancel {
+  margin-left: -4%;
+  cursor: pointer !important;
+}
+.subheading {
+  font-size: 30px !important;
+  vertical-align: middle !important;
+  padding-left: 2% !important;
+}
+.img,
+.svg {
+  cursor: pointer !important;
 }

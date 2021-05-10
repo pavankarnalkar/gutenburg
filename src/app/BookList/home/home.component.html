@@ -1,45 +1,75 @@
-<div *ngIf="!selectedCategory; else category" class="home">
-  <mat-card-header gutterBottom>
-    <mat-card-title>Gutenburg Project</mat-card-title>
-    <mat-card-subtitle>A social cataloging website that allows you to freely search its database
-      of books, annotations, and reviews.</mat-card-subtitle>
-  </mat-card-header>
-  <mat-card-content>
-    <mat-grid-list [cols]="isMobile ? 1 : 2" rowHeight="100px">
-      <mat-grid-tile type="button" class="mat-body d-flex mat-elevation-z2" *ngFor="let category of categories"
-        (click)="selectCategory(category.value)">
-        {{ category.name }}
+<div class="content" [ngClass]="selectedCategory ? 'bookHeight' : 'homeHeight'">
+  <div *ngIf="!selectedCategory; else category" class="home">
+    <div>
+      <div class="title">Gutenburg Project</div>
+
+      <div class="subtitle">
+        A social cataloging website that allows you to freely search its
+        database of books, annotations, and reviews.
+      </div>
+    </div>
+    <!-- <div> -->
+    <div class="bookList">
+      <div
+        type="button"
+        class="category-art"
+        *ngFor="let category of categories"
+        (click)="selectCategory(category.value)"
+      >
+        <img src="{{ category.img }}" class="categoryImage" />
+        <span class="spaceLeft">{{ category.name }}</span>
         <div class="spaceRight">
           <img src="../../../assets/img/Next.svg" alt="next" />
         </div>
-      </mat-grid-tile>
-    </mat-grid-list>
-  </mat-card-content>
-</div>
-<ng-template #category>
-  <!-- <div> -->
-  <form class="example-form">
-    <mat-form-field class="example-full-width">
-      <mat-label>{{ selectedCategory }}</mat-label>
-      <input type="text" placeholder="Pick one" aria-label="selectedCategory" matInput [formControl]="myControl"
-        [matAutocomplete]="auto" (click)="onClick(myControl.value)" />
-      <mat-autocomplete #auto="matAutocomplete">
-        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-          {{ option }}
-        </mat-option>
-      </mat-autocomplete>
-    </mat-form-field>
-  </form>
-  <div class="bookList">
-    <div class="album-art" *ngFor="let book of filteredData" (click)="selectCategory(category.value)">
-      <img mat-card-image src="{{ book.formats['image/jpeg'] }}" alt="bookCover" />
-      <div class="book-title">
-        {{ book.title }}
       </div>
-      <span *ngFor="let author of book.authors" class="author-name">
-        {{ author.name.split(",").join("") }}
+    </div>
+    <!-- </div> -->
+  </div>
+  <ng-template #category>
+    <div>
+      <span>
+        <img
+          src="../../../assets/img/Back.svg"
+          alt="back"
+          (click)="selectedCategory = null; value = ''"
+        />
+        <label class="subheading">{{ selectedCategory }}</label> </span
+      ><br />
+      <input
+        type="text"
+        placeholder="Search"
+        [(ngModel)]="value"
+        (keyup)="findBook($event)"
+      />
+      <span
+        mat-button
+        *ngIf="value"
+        mat-elevation-z2
+        mat-icon-button
+        aria-label="Clear"
+        (click)="value = ''; $event.stopPropagation()"
+        ><img src="../../../assets/img/Cancel.svg" class="cancel" alt="" />
       </span>
     </div>
-  </div>
-<!-- </div> -->
-</ng-template>
+    <div class="bookList">
+      <div
+        (click)="openBook($event, book)"
+        type="button"
+        class="mat-body album-art"
+        *ngFor="let book of filteredData"
+      >
+        <img
+          mat-card-image
+          src="{{ book.formats['image/jpeg'] }}"
+          alt="bookCover"
+        />
+        <div class="book-title">
+          {{ book.title }}
+        </div>
+        <span *ngFor="let author of book.authors" class="author-name">
+          {{ author.name.split(",").join("") }}
+        </span>
+      </div>
+    </div>
+  </ng-template>
+</div>
